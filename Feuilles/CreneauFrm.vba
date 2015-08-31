@@ -65,8 +65,16 @@ Private Sub EnseignantCmbBx_Change()
 End Sub
 
 Private Sub ModifyBttn_Click()
-    Selection.Cells(1, 1) = FinalResultTxtBx.Text
     With Selection
+        .Cells(1, 1) = FinalResultTxtBx.Text
+        With .Cells(1, 1)
+            If Not .Comment Is Nothing Then
+                .Comment.Delete
+            End If
+            If HiddenCommentTxtBx.Text <> "" Then
+                .AddComment (HiddenCommentTxtBx.Text)
+            End If
+        End With
         .borders(xlEdgeTop).LineStyle = XlLineStyle.xlContinuous
         .borders(xlEdgeRight).LineStyle = XlLineStyle.xlContinuous
         .borders(xlEdgeBottom).LineStyle = XlLineStyle.xlContinuous
@@ -117,10 +125,6 @@ Private Sub RemoveTeacherFromSelCmdBttn_Click()
     FinalResultTxtBx.Text = cren.WriteStr()
 End Sub
 
-Private Sub SelectedRoomLstBx_Click()
-
-End Sub
-
 Private Sub UECmbBx_Change()
     cren.UE = UECmbBx.Value
     FinalResultTxtBx.Text = cren.WriteStr()
@@ -147,6 +151,9 @@ Private Sub UserForm_Initialize()
     End With
     '.Offset(-2, 0).Value
     FinalResultTxtBx.Text = Selection.Cells(1, 1)
+    If Not Selection.Cells(1, 1).Comment Is Nothing Then
+        HiddenCommentTxtBx.Text = Selection.Cells(1, 1).Comment.Text
+    End If
     cren.Lire Selection.Cells(1, 1), dayd
     
     Set Ws = Sheets("Listes") 'Correspond au nom de votre onglet dans le fichier Excel
