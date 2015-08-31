@@ -78,9 +78,25 @@ Private Sub ExtractListing_Click()
                             ElseIf (HeadHere.Value = Worksheets("Listes").Range("I14")) Then
                                 WriteHere.Value = cren.WriteSalles()
                             ElseIf (HeadHere.Value = Worksheets("Listes").Range("I15")) Then
-                                WriteHere.Value = cren.WriteSalles()
+                                WriteHere.Value = cren.Commentaire
                             ElseIf (HeadHere.Value = Worksheets("Listes").Range("I16")) Then
-                                WriteHere.Value = cren.WriteSalles()
+                                If oneCell.Comment Is Nothing Then
+                                    WriteHere.Value = ""
+                                Else
+                                    WriteHere.Value = oneCell.Comment.Text
+                                End If
+                            ElseIf (HeadHere.Value = Worksheets("Listes").Range("I17")) Then
+                                Dim GroupeClass As String ' 1/1 pour classe entiere 1/2 ou 2/2 pour demi groupe 1/3 ou 2/3 ou 3/3 pour tiers de groupe, etc
+                                If oneCell.MergeArea.Columns.Count = 1 Then
+                                    If oneCell.MergeArea.Cells(1, 1).Column Mod 2 = 1 Then
+                                        GroupeClass = "'1/2"
+                                    Else
+                                        GroupeClass = "'2/2"
+                                    End If
+                                Else
+                                    GroupeClass = "'" + Trim(str(1 + eIdx)) + "/" + Trim(str(1 + cren.HowManyEnseignants))
+                                End If
+                                WriteHere.Value = GroupeClass
                             End If
                             Set WriteHere = WriteHere.Offset(0, 1)
                             Set HeadHere = HeadHere.Offset(0, 1)
@@ -137,17 +153,17 @@ End Function
 
 Private Function AddCommentInCellIfEmpty(cellToTest As Range, rngToComment As Range, Comment As String) As Integer
     AddCommentInCellIfEmpty = 0
-    Dim BeginComment As String
+    'Dim BeginComment As String
     
-    If rngToComment.Comment Is Nothing And Comment <> "" And cellToTest = "" Then
-        rngToComment.AddComment
-    End If
-    If Comment = "" And Not rngToComment.Comment Is Nothing Then
-        rngToComment.Comment.Delete
-    End If
+    'If rngToComment.Comment Is Nothing And Comment <> "" And cellToTest = "" Then
+    '    rngToComment.AddComment
+    'End If
+    'If Comment = "" And Not rngToComment.Comment Is Nothing Then
+    '    rngToComment.Comment.Delete
+    'End If
     If Comment <> "" And cellToTest = "" Then
-        BeginComment = rngToComment.Comment.Text
-        rngToComment.Comment.Text BeginComment & Chr(10) & Comment
+        'BeginComment = rngToComment.Comment.Text
+        'rngToComment.Comment.Text BeginComment & Chr(10) & Comment
         cellToTest.Interior.Color = RGB(255, 96, 96)
         
         If IsEmpty(Worksheets("Erreurs").Range("A1").Value) Then
