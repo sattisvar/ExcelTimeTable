@@ -1,5 +1,9 @@
 'Extraction of the Listing
 Private Sub ExtractListing_Click()
+    Dim ModeRecalcul As Long
+    ModeRecalcul = Application.Calculation
+    Application.Calculation = xlCalculationManual ' bloque le calcul automatique.
+
     'oneCell will store the cells in one column of Plage
     'col will store one column of Plage
     Dim Plage As Range, oneCell As Range, col As Range, CountError As Integer
@@ -129,6 +133,7 @@ Private Sub ExtractListing_Click()
         Application.Goto Reference:=Worksheets("Erreurs").Range("A1"), Scroll:=False
     End If
     Set Plage = Nothing
+    Application.Calculation = ModeRecalcul ' met en place le calcul automatique
 End Sub
 
 Private Sub CreneauxLinesHeight()
