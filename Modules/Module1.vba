@@ -15,12 +15,11 @@ Function NbHours(rCell As Range) As Double
 ' Returns true if referenced cell is Merged
     Dim i As Long
     Dim res As Double
-    res = 0
-    i = rCell.MergeArea.Cells(1, 1).Row
-    Do While i < rCell.MergeArea.Cells(1, 1).Row + rCell.MergeArea.Rows.Count
-        res = res + Worksheets("Annuel").Range("B" & i + 1).Value - Worksheets("Annuel").Range("B" & i).Value
-        i = i + 2
-    Loop
+    i = rCell.MergeArea.Cells(1, 1).Row + rCell.MergeArea.Rows.Count - 1
+    res = Worksheets("Annuel").Range("B" & i).Value - Worksheets("Annuel").Range("B" & rCell.MergeArea.Cells(1, 1).Row).Value
+    If res * 24 > 3 Then
+        res = res - 0.25 / 24
+    End If
     NbHours = res
 End Function
 
