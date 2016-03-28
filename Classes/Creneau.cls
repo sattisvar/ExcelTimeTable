@@ -153,7 +153,25 @@ Public Sub Lire(cell As Range, Optional DayDate As Date = 0)
     Dim Tx() As String
     Dim FirstLine() As String
     Dim SecondLine() As String
-    Tx = Split(inputStr, Chr(13) & Chr(10), 4)
+    Tx = Split(inputStr, Chr(10))
+    Dim CombienLigne As Integer
+    Dim Loc As Integer
+    CombienLigne = UBound(Tx)
+    ' A B _ D _ F
+    ' A B
+    Loc = LBound(Tx)
+    For t = LBound(Tx) To UBound(Tx)
+        If Trim(Tx(t)) = "" Then
+            CombienLigne = CombienLigne - 1
+        Else
+            If Loc <= UBound(Tx) Then
+                Tx(Loc) = Tx(t)
+                Loc = Loc + 1
+            End If
+        End If
+    Next t
+    ReDim Preserve Tx(0 To CombienLigne) As String
+
     FirstLine = Split(Tx(0), "#")
     With Me
         If UBound(FirstLine) - LBound(FirstLine) = 1 Then
@@ -172,7 +190,9 @@ Public Sub Lire(cell As Range, Optional DayDate As Date = 0)
                     .AjouteEnseignant Trim(LstEnseignant(e))
                 Next e
                 If (UBound(Tx) >= 3) Then
-                    .Commentaire = Tx(3)
+                    For t = 3 To UBound(Tx)
+                        .Commentaire = .Commentaire & Chr(13) & Tx(t)
+                    Next t
                 End If
             End If
         End If
@@ -235,6 +255,7 @@ End Sub
 Private Sub Class_Initialize()
 
 End Sub
+
 
 
 
