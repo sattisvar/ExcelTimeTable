@@ -1,9 +1,9 @@
+
 'Extraction of the Listing
 Private Sub ExtractListing_Click()
     Dim ModeRecalcul As Long
     ModeRecalcul = Application.Calculation
     Application.Calculation = xlCalculationManual ' bloque le calcul automatique.
-
     'oneCell will store the cells in one column of Plage
     'col will store one column of Plage
     Dim Plage As Range, oneCell As Range, col As Range, CountError As Integer
@@ -38,6 +38,7 @@ Private Sub ExtractListing_Click()
                     Dim cren As New Creneau
                     cren.Reset
                     cren.Lire oneCell, CDate(DayDate)
+                    oneCell.Value = cren.WriteStr
                     Dim WriteHere As Range
                     Dim eIdx As Integer
                     For eIdx = 0 To cren.HowManyEnseignants()
@@ -130,7 +131,7 @@ Private Sub ExtractListing_Click()
     End If
     MsgBox MsgT, vbOKOnly, "Infos"
     If CountError <> 0 Then
-        Application.Goto Reference:=Worksheets("Erreurs").Range("A1"), Scroll:=False
+        Application.GoTo Reference:=Worksheets("Erreurs").Range("A1"), Scroll:=False
     End If
     Set Plage = Nothing
     Application.Calculation = ModeRecalcul ' met en place le calcul automatique
@@ -202,7 +203,6 @@ Private Sub InsertLesson_Click()
     On Error Resume Next
     CreneauFrm.Show
 End Sub
-
 
 
 
