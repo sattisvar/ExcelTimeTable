@@ -1,8 +1,11 @@
 Private Sub UpdateButton_Click()
-
+    Dim ModeRecalcul As Long
+    ModeRecalcul = Application.Calculation
+    Application.Calculation = xlCalculationManual ' bloque le calcul automatique.
+    
     Dim dTime As Double
     dTime = MicroTimer
-    Dim Plage As Range, c As Range
+    Dim Plage As Range, c As Range, oneCell As Range
     Dim GetLastRowForThisWeek As Long, GetFirstRowForThisWeek As Long, LastRow As Long
     GetFirstRowForThisWeek = Worksheets("Annuel").Range("B1").End(xlDown).Row
     GetLastRowForThisWeek = Worksheets("Annuel").Range("B" & GetFirstRowForThisWeek).End(xlDown).Row
@@ -24,13 +27,18 @@ Private Sub UpdateButton_Click()
             DayDate = col.Cells(-1, 1).MergeArea.Cells(1, 1).Value
             For Each oneCell In col.Cells
                 If (oneCell.Address = oneCell.MergeArea.Cells(1, 1).Address And oneCell <> "" And Worksheets("Annuel").Range("B" & oneCell.Row).Value <> "") Then
+                    Dim cren As New Creneau
+                    cren.Reset
+                    cren.Lire oneCell, CDate(DayDate)
+                    Dim uE As String
+                    uE = cren.uE
                     With oneCell
                         .FormatConditions.Delete
-                        'For Each c In [Listes!E3:E26]
-                        '    .FormatConditions.Add _
-                        '        Type:=xlTextString, TextOperator:=xlContains, String:="=Listes!" & c.Address
-                        '    .FormatConditions(.FormatConditions.Count).Interior.Color = c.Interior.Color
-                        'Next c
+                        For Each colorCell In [Listes!E3:E26]
+                            If colorCell.Value = uE Then
+                                .Interior.Color = colorCell.Interior.Color
+                            End If
+                        Next colorCell
                     End With
                 End If
                 PercentVal = PercentVal + PercentStep
@@ -48,11 +56,6 @@ Private Sub UpdateButton_Click()
     Dim MsgT As String
     MsgT = "La mise à jour a réussi et a pris " & Int(dTime) & "s"
     MsgBox MsgT, vbOKOnly, "Infos"
+    
+    Application.Calculation = ModeRecalcul ' met en place le calcul automatique
 End Sub
-
-
-
-
-
-
-
