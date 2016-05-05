@@ -192,6 +192,7 @@ Private Function AddCommentInCellIfEmpty(cellToTest As Range, rngToComment As Ra
         Worksheets("Erreurs").Range("F" & nextrow).Value = Worksheets("Erreurs").Range("F1").Value
         Worksheets("Erreurs").Range("G" & nextrow).Value = cellToTest.Address
         Worksheets("Erreurs").Range("H" & nextrow).Value = Worksheets("Erreurs").Range("H1").Value
+        Worksheets("Erreurs").Range("I" & nextrow).Value = rngToComment.Value
         
         AddCommentInCellIfEmpty = 1
     Else
