@@ -22,30 +22,30 @@ APPLICATION_NAME = 'ScriptsTimeTable'
 
 CalID = {
     'L1' : {
-        'Tous' : '9fnaccpmdsbu40ikv0t05oiui0@group.calendar.google.com',
-        'G1' : 'd5p6tiig01oa6eeavmmjo8hrv4@group.calendar.google.com',
-        'G2' : 'v66271c0mdgufkchar1ddal66k@group.calendar.google.com',
+        'Tous' : '***@group.calendar.google.com',
+        'G1' : '***@group.calendar.google.com',
+        'G2' : '***@group.calendar.google.com',
     },
     'L2' : {
-        'Tous' : '50isphb3vtjlltfk5an9sdi05k@group.calendar.google.com',
-        'G1' : '4tftm0b1i9lvtq90hsnku80fro@group.calendar.google.com',
-        'G2' : 'dajefooh8hn892un0a5mfafeag@group.calendar.google.com',
+        'Tous' : '***@group.calendar.google.com',
+        'G1' : '***@group.calendar.google.com',
+        'G2' : '***@group.calendar.google.com',
     },
     'L3' : {
         'BioIng' : {
-            'G1' : 'dj40eu0osq3tt95s41fd11q0ig@group.calendar.google.com',
-            'G2' : 'ski1p038ldoee5vf0srvv77inc@group.calendar.google.com',
-            'Tous' : 'q3gsg7ano4njt9rr6puo2p5cus@group.calendar.google.com'
+            'G1' : '***@group.calendar.google.com',
+            'G2' : '***@group.calendar.google.com',
+            'Tous' : '***@group.calendar.google.com'
         },
         'Commun': {
-            'G1' : '7ib1d8a2utbvjbk1idv2vjhit4@group.calendar.google.com',
-            'G2' : '7ou0h6ao1rgip0ciri51gpoa7k@group.calendar.google.com',
-            'Tous' : 'gcs5fsuuiqesp9cf840hbtmtp0@group.calendar.google.com',
+            'G1' : '***@group.calendar.google.com',
+            'G2' : '***@group.calendar.google.com',
+            'Tous' : '***@group.calendar.google.com',
         },
         'IPMI' : {
-            'G1' : 'f4vrim0m300fuh3hfg3otj30r4@group.calendar.google.com',
-            'G2' : '4f0uetqe8kjj00nj0u68k7mo94@group.calendar.google.com',
-            'Tous' : 't141mkpui8u1eff7t7rh4fg064@group.calendar.google.com',
+            'G1' : '***@group.calendar.google.com',
+            'G2' : '***@group.calendar.google.com',
+            'Tous' : '***@group.calendar.google.com',
         },
     },
 }
