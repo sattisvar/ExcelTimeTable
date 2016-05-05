@@ -43,6 +43,7 @@ Private Sub ExtractListing_Click()
                     Dim eIdx As Integer
                     For eIdx = 0 To cren.HowManyEnseignants()
                         Set WriteHere = Worksheets("Listing").Range("A" & iListingRow)
+                        WriteHere.Interior.ColorIndex = 0
                         Set HeadHere = Worksheets("Listing").Range("A1")
                         Do While HeadHere.Value <> ""
                             If (HeadHere.Value = Worksheets("Listes").Range("I3")) Then
