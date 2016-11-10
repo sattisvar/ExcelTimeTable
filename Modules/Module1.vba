@@ -15,7 +15,7 @@ Function NbHours(rCell As Range) As Double
 ' Returns true if referenced cell is Merged
     Dim i As Long
     Dim res As Double
-    i = rCell.MergeArea.Cells(1, 1).Row + rCell.MergeArea.Rows.Count - 1
+    i = rCell.MergeArea.Cells(1, 1).Row + rCell.MergeArea.Rows.Count
     res = Worksheets("Annuel").Range("B" & i).Value - Worksheets("Annuel").Range("B" & rCell.MergeArea.Cells(1, 1).Row).Value
     If res * 24 > 3 Then
         res = res - 0.25 / 24
