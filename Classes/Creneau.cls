@@ -148,7 +148,7 @@ Public Sub Lire(cell As Range, Optional DayDate As Date = 0)
     End If
     Set Attached_Worksheet = cell.Worksheet
     DateHourOfBegin = DayDate + cell.Offset(0, 2 - cell.Column).Value
-    DateHourOfEnd = DayDate + cell.Offset(0, 2 - cell.Column).Offset(cell.MergeArea.Rows.Count - 1, 0).Value
+    DateHourOfEnd = DayDate + cell.Offset(0, 2 - cell.Column).Offset(cell.MergeArea.Rows.Count, 0).Value
     TimeLength = NbHours(cell)
     Dim Tx() As String
     Dim FirstLine() As String
